@@ -1,0 +1,77 @@
+---
+layout: runbook
+title: '0002 · Split #4471 and merge by cause'
+owner: calvinyst with Codex
+status: proposed
+reviewed: '2026-10-29'
+signature: 'v1.eyJzdWIiOiI0OTE3IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyNDIzNDcsImV4cCI6MTc5MzMyODc0N30.UjC2B0HcnUTUQgJcPtrcfxQfU5hbM72edQ5af86pARI'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import InvestigationSummary from '#lib/kb/InvestigationSummary.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+## Decision and scope
+
+Replace subject-only merging with cause-based triage. This new record proposes to supersede
+[accepted decision 0001](/kb/decisions/0001-dedupe-by-subject/); that historical decision stays intact.
+The [triage page](/kb/triage/dedupe/) says to merge by subject, but its interactive examples already
+compare causes. Its old review date and stale warning are reasons to verify the rule against the live components.
+
+The [incident page](/kb/incidents/4471/) says one issue and one queued fix.
+Its rendered cause table contradicts that prose: the merged reports cover a shared-parser problem
+and a separate booking-form hint problem. Neither component proves that a product fix has shipped.
+
+## What the export shows
+
+<InvestigationSummary />
+
+<CauseTable ticket={4471} />
+
+Counts come from the exported records, deduplicated by report ID and filtered to this ticket,
+then joined to the tenant directory. Browser locale and intake tags are clues, not the grouping rule.
+The `dayFirst` function asks the platform's locale formatter for date-part order.
+
+## Separate fixes
+
+**Shared parser:** day-first tenants send dates through a parser that reads month first.
+For example, Harbour Dental's report R-41200 describes 7 April becoming 4 July.
+Make parsing agree with the tenant's date order and check app, email, and booking-v2 paths.
+The app and email paths for booking-v3 tenants still belong to this parser group.
+
+**Form hint:** booking-v3 shows `MM/DD/YYYY` while its form interprets entered dates using the tenant's day-first order.
+The cause applies to the form channel for Alder Physio, Copper Studio, and Pale Harbour.
+Report R-41230 at Copper Studio is tagged parser by intake but belongs here.
+Make the displayed hint and form interpretation agree. A parser-only fix does not correct a misleading hint.
+
+These fixes are proposed from the KB's classification logic and reports. The exported KB does not contain
+the product parser or form implementation, so product reproduction and regression checks remain engineering work.
+
+## When the desk acted
+
+<QueueTimeline ticket={4471} />
+
+Reports arrived before the large July merge. Read received and merged dates as different events.
+This is the export through 4 October, not a claim about today's live queue or a resolved incident.
+
+## Rule for the next report
+
+Read the body, look up the tenant's locale and form, and identify the input channel.
+Merge only when the evidence supports the same cause. Matching subjects can hide different causes;
+different subjects can describe the same cause. If the tenant is unknown or the evidence conflicts,
+keep the report separate for investigation instead of forcing a merge.
+
+<DedupeExplorer />
+
+## Follow-through
+
+Keep a separate work ticket and report count for each cause. Retain the timing anomalies as evidence
+and do not mark them fixed merely because the month/day problems are fixed.
+Rebuild this page and recheck the report groups whenever the desk provides a newer export.
+If counts, tenant configuration, or classifications change, update the corresponding tickets and record the change.
+
+<RenderStamp {signature} />
