@@ -12,6 +12,7 @@ signature: 'v1.eyJzdWIiOiI0OTE3IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpY
   import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
   import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
   import InvestigationSummary from '#lib/kb/InvestigationSummary.svelte';
+  import EngineeringUpdate from '#lib/kb/EngineeringUpdate.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 </script>
 
@@ -24,7 +25,11 @@ compare causes. Its old review date and stale warning are reasons to verify the 
 
 The [incident page](/kb/incidents/4471/) says one issue and one queued fix.
 Its rendered cause table contradicts that prose: the merged reports cover a shared-parser problem
-and a separate booking-form hint problem. Neither component proves that a product fix has shipped.
+and a separate booking-form hint problem. Current outcomes come from the later engineering update below.
+
+## Current disposition
+
+<EngineeringUpdate />
 
 ## What the export shows
 
@@ -56,7 +61,8 @@ the product parser or form implementation, so product reproduction and regressio
 <QueueTimeline ticket={4471} />
 
 Reports arrived before the large July merge. Read received and merged dates as different events.
-This is the export through 4 October, not a claim about today's live queue or a resolved incident.
+This chart covers the export through 4 October. The later engineering update reports the closure on 5 October;
+the historical chart and counts remain an account of the earlier reports.
 
 ## Rule for the next report
 

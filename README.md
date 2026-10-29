@@ -36,10 +36,16 @@ serve the `rendered/` directory or use the preview command to see it as the desk
 
 ## Interpretation limits
 
-The KB's prose says one issue, while its live components show two causes. Counts use unique report IDs,
+The later [course engineering update](https://hq.mega.dev/challenges/what-it-shows#engineering-update)
+reports #4471 closed on 2026-10-05: parser FIXED; form hint WON'T FIX because booking-v3 was retired.
+The corresponding GitHub closure reasons are completed and not planned. The signed page renders this update
+from `src/lib/data/engineering-update.json`; historical counts stay unchanged.
+
+The original KB's prose says one issue, while its live components show two causes. Counts use unique report IDs,
 tenant locale/form, and input channel rather than the subject or intake tag. Received dates and merge dates
-describe different events; the July merge spike includes old reports. This snapshot does not establish
-the current live queue, a deployed fix, or a third proven root cause for unusual timing reports.
+describe different events; the July merge spike includes old reports. The export alone does not establish
+the current queue or resolution. The later course update supplies the two closure outcomes, but it does not
+prove a third root cause or a resolution for the unusual timing reports.
 
 The actual product parser and booking form were not in the export. Issue reproduction steps and fixes
 are engineering proposals grounded in the reports and classification code, not product tests run here.

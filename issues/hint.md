@@ -25,4 +25,8 @@ Open booking-v3 for one of these tenants and follow the MM/DD/YYYY hint: enter 0
 
 Derive the displayed instruction and date interpretation from the same configuration. Verify all three affected tenants with ambiguous dates and days above 12. Check booking-v2 and month-first tenants as controls. App and email submissions are outside this work item's scope.
 
-[KB analysis and caveats](../blob/main/src/routes/kb/decisions/0002-dedupe-by-cause/+page.svx).
+[KB analysis and caveats](https://github.com/calvinyst/mega-s01e03-what-it-shows/blob/main/src/routes/kb/decisions/0002-dedupe-by-cause/+page.svx).
+
+## Resolution
+
+The [course engineering update](https://hq.mega.dev/challenges/what-it-shows#engineering-update) reports #4471 closed on 5 October 2026 and this problem WON'T FIX: `booking-v3 form retired`. Observed on 29 October 2026. Close this issue as not planned, because retirement removes the form rather than correcting it. The historical report count remains 33.

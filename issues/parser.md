@@ -27,4 +27,8 @@ Use the tenant's date order consistently. Check ambiguous dates, days above 12, 
 
 The five timing anomalies remain in this count under the supplied classifier. Their evidence and follow-up questions are preserved in the KB; this issue does not claim the proposed fix will resolve those unusual symptoms.
 
-[KB analysis and caveats](../blob/main/src/routes/kb/decisions/0002-dedupe-by-cause/+page.svx).
+[KB analysis and caveats](https://github.com/calvinyst/mega-s01e03-what-it-shows/blob/main/src/routes/kb/decisions/0002-dedupe-by-cause/+page.svx).
+
+## Resolution
+
+The [course engineering update](https://hq.mega.dev/challenges/what-it-shows#engineering-update) reports #4471 closed on 5 October 2026 and this problem FIXED: `fix(dates): parse dd/mm for eu locales`. Observed on 29 October 2026. Close this issue as completed. The historical report count remains 379.
